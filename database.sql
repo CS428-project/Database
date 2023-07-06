@@ -19,8 +19,8 @@ CREATE TABLE Users
 	PRIMARY KEY(ID)
 );
 
---create table account
-CREATE TABLE Account
+--create table register
+CREATE TABLE Register
 (
 	userID int NOT NULL,
 	username varchar(20) NOT NULL,
@@ -35,17 +35,10 @@ CREATE TABLE Mentor
 (
 	mentorID int NOT NULL,
 	Language nvarchar(100) NOT NULL,
+	FieldID int NOT NULL,
 	Description text,
 	Rating float NOT NULL
 	PRIMARY KEY(mentorID)
-);
-
---create table mentor field
-CREATE TABLE MentorField
-(
-	mentorID int NOT NULL,
-	fieldid int,
-	PRIMARY KEY(mentorID),
 );
 
 --create table work experience
@@ -97,10 +90,6 @@ CREATE TABLE Income
 )
 
 alter table Mentor 
-ADD CONSTRAINT FK_Field_FieldID
-FOREIGN KEY(fieldid) REFERENCES Field(ID);
-
-alter table MentorField
 ADD CONSTRAINT FK_MENTOR_MENTORID
 FOREIGN KEY(mentorID) REFERENCES Users(ID);
 
