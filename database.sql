@@ -65,7 +65,7 @@ CREATE TABLE Services
 
 CREATE TABLE Field
 (
-	ID int NOT NULL,
+	ID int IDENTITY(1001,1) NOT NULL,
 	Type varchar(50),
 	PRIMARY KEY(ID),
 	UNIQUE(Type)
@@ -198,14 +198,14 @@ INSERT INTO Register (userID, username, password, created_at)
 SELECT ID, CONCAT(LOWER(FirstName), '_', LOWER(LastName)), CONCAT(LOWER(FirstName), '123'), '2023-09-01'
 FROM Users
 
-INSERT INTO Field
+INSERT INTO Field(Type)
 VALUES
-	(1001, 'Health and Wellness Coaching'),
-	(1002, 'Education Coaching'),
-	(1003, 'Business Coaching'),
-	(1004, 'Career Coaching'),
-	(1005, 'Personal Development Coaching'),
-	(1006, 'Executive Coaching');
+	('Health and Wellness Coaching'),
+	('Education Coaching'),
+	('Business Coaching'),
+	('Career Coaching'),
+	('Personal Development Coaching'),
+	('Executive Coaching');
 
 INSERT INTO Mentor
 VALUES
