@@ -306,7 +306,16 @@ VALUES
 	(29, 'Fitness Consultant', 'Fitness Solutions Agency', 'Personal Trainer (ABC Gym)', 15),
 	(30, 'Holistic Health Practitioner', 'Holistic Wellness Center', 'Reiki Practitioner (XYZ Healing Arts)', 10);
 
-
+--GO
+--CREATE PROCEDURE sp_AddUsers @firstname nvarchar(20), @lastname nvarchar(20), @email varchar(50),
+--@telephone varchar(20), @dob date, @country varchar(20), @gender char, @role varchar(6)
+--AS
+--	IF EXISTS(SELECT Email, Telephone FROM Users WHERE Email = @email OR Telephone = @telephone )
+--		THROW 50007, 'The pet has already existed', 1
+--	ELSE
+--		INSERT INTO Pets 
+--		VALUES (@ID, @Type, @Lostdate, @DetailType, @weight, @height, @Color, @Name,@Description, @Location, @gender);
+--GO
 
 -- Rollback all transactions
 ALTER DATABASE Coaching_Website SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
