@@ -37,7 +37,7 @@ CREATE TABLE Mentor
 	Language nvarchar(100) NOT NULL,
 	FieldID int NOT NULL,
 	Description text,
-	Rating float NOT NULL
+	Rating float,
 	PRIMARY KEY(mentorID)
 );
 
@@ -195,7 +195,7 @@ VALUES
 	('Elijah', 'Reynolds', 'elijah.reynolds@example.com', '3698521470', '1989-03-08', 'UK', 'M', 'Mentee');
 
 INSERT INTO Register (userID, username, password, created_at)
-SELECT ID, CONCAT(LOWER(FirstName), '_', LOWER(LastName)), CONCAT(LOWER(FirstName), '123'), '2023-09-01'
+SELECT ID, CONCAT(LOWER(FirstName), '_', LOWER(LastName)), '12345678', '2023-09-01'
 FROM Users
 
 INSERT INTO Field(Type)
@@ -209,35 +209,35 @@ VALUES
 
 INSERT INTO Mentor
 VALUES
-(1, 'English', 1001, 'I am a passionate health and wellness coach dedicated to helping you achieve a balanced and fulfilling life. Let us work together to improve your physical and mental well-being.', 4.3),
+(1, 'English', 1001, 'I am a passionate health and wellness coach dedicated to helping you achieve a balanced and fulfilling life. Let us work together to improve your physical and mental well-being.', NULL),
 (2, 'English', 1001, 'With a focus on holistic well-being, I am here to guide you on your journey to optimal health and vitality. Together, we can create lasting positive changes in your life.', 4.5),
 (3, 'English', 1001, 'Greetings! As a health and wellness coach, I am committed to assisting you in developing sustainable lifestyle habits and achieving your wellness goals.', 4.2),
 (4, 'English', 1001, 'Hello! I specialize in health and wellness coaching and am dedicated to supporting you in creating a healthier and happier life.', 4.4),
 (5, 'English', 1001, 'I am an experienced health and wellness coach ready to help you make positive changes in your life. Let us embark on this transformative journey together!',4.6),
-(6, 'English', 1002, 'Hi! I am an education coach dedicated to empowering students in their academic journey. Let us work together to enhance your learning strategies and achieve academic success.', 4.3),
+(6, 'English', 1002, 'Hi! I am an education coach dedicated to empowering students in their academic journey. Let us work together to enhance your learning strategies and achieve academic success.',NULL),
 (7, 'English', 1002, 'Greetings! As an education coach, I am passionate about helping students develop effective study techniques, organizational skills, and a growth mindset to excel academically.', 4.5),
 (8, 'English', 1002, 'Hello! With my expertise in education coaching, I can guide you in setting goals, improving study habits, and maximizing your learning potential.', 4.2),
 (9, 'English', 1002, 'Welcome! I specialize in education coaching and can provide personalized guidance to help you overcome challenges, boost your motivation, and succeed academically.', 4.4),
-(10, 'English', 1002, 'I am an experienced education coach ready to support you in achieving your educational goals. Let us work together to unlock your full academic potential.', 4.6),
+(10, 'English', 1002, 'I am an experienced education coach ready to support you in achieving your educational goals. Let us work together to unlock your full academic potential.', NULL),
 (11, 'English', 1003, 'Hello! As a business coach, I can help you develop and implement effective strategies to drive growth and achieve your business objectives.', 4.3),
 (12, 'English', 1003, 'Greetings! I specialize in business coaching and can assist you in various aspects of entrepreneurship, such as business planning, marketing, and leadership development.', 4.5),
-(13, 'English', 1003, 'Hi there! With my expertise in business coaching, I can guide you in building a successful business, overcoming challenges, and reaching new heights of success.', 4.2),
+(13, 'English', 1003, 'Hi there! With my expertise in business coaching, I can guide you in building a successful business, overcoming challenges, and reaching new heights of success.', NULL),
 (14, 'English', 1003, 'Welcome! I am a business coach committed to helping you develop essential business skills, optimize operations, and achieve sustainable business growth.', 4.4),
 (15, 'English', 1003, 'I am an experienced business coach ready to support you in navigating the complexities of the business world. Let us work together to elevate your entrepreneurial journey.', 4.6),
-(16, 'English', 1004, 'Hi! As a career coach, I am dedicated to supporting individuals in finding meaningful and fulfilling careers. Let us work together to identify your strengths and achieve your professional goals.', 4.3),
+(16, 'English', 1004, 'Hi! As a career coach, I am dedicated to supporting individuals in finding meaningful and fulfilling careers. Let us work together to identify your strengths and achieve your professional goals.',NULL),
 (17, 'English', 1004, 'Greetings! With my expertise in career coaching, I can assist you in exploring different career paths, developing job search strategies, and navigating career transitions.', 4.5),
 (18, 'English', 1004, 'Hello! As a career coach, I am passionate about helping individuals uncover their true potential and make informed decisions to excel in their professional lives.', 4.2),
 (19, 'English', 1004, 'Welcome! I specialize in career coaching and can provide guidance on resume writing, interview skills, and career advancement strategies to help you succeed.', 4.4),
 (20, 'English', 1004, 'I am an experienced career coach ready to support you in achieving your career goals and finding fulfillment in your professional journey. Let us work together to unlock your full potential.', 4.6),
 (21, 'English', 1005, 'Hello! As a personal development coach, I am dedicated to helping individuals cultivate self-awareness, enhance their mindset, and achieve personal growth.', 4.3),
 (22, 'English', 1005, 'Hi there! I specialize in personal development coaching and can guide you in discovering your strengths, overcoming self-limiting beliefs, and creating a life of fulfillment.', 4.5),
-(23, 'English', 1005, 'Greetings! With my expertise in personal development coaching, I can support you in setting meaningful goals, improving self-confidence, and unlocking your full potential.', 4.2),
+(23, 'English', 1005, 'Greetings! With my expertise in personal development coaching, I can support you in setting meaningful goals, improving self-confidence, and unlocking your full potential.', NULL),
 (24, 'English', 1005, 'Welcome! I am a personal development coach committed to empowering you to overcome obstacles, develop resilience, and live a purposeful and authentic life.',4.4),
-(25, 'English', 1005, 'I am an experienced personal development coach ready to guide you on your journey of self-discovery, personal growth, and transformation. Together, we can create positive change.', 4.6),
+(25, 'English', 1005, 'I am an experienced personal development coach ready to guide you on your journey of self-discovery, personal growth, and transformation. Together, we can create positive change.',NULL),
 (26, 'English', 1006, 'Hi! As an executive coach, I specialize in partnering with leaders to enhance their leadership skills, develop effective communication, and achieve professional success.', 4.3),
 (27, 'English', 1006, 'Greetings! I am an experienced executive coach dedicated to supporting senior executives in maximizing their potential, leading with impact, and driving organizational excellence.', 4.5),
-(28, 'English', 1006, 'Hello! With my expertise in executive coaching, I can help you develop a strategic vision, strengthen your decision-making abilities, and inspire high-performing teams.', 4.2),
-(29, 'English', 1006, 'Welcome! I specialize in executive coaching and can provide guidance on leadership development, succession planning, and navigating complex organizational dynamics.', 4.4),
+(28, 'English', 1006, 'Hello! With my expertise in executive coaching, I can help you develop a strategic vision, strengthen your decision-making abilities, and inspire high-performing teams.', NULL),
+(29, 'English', 1006, 'Welcome! I specialize in executive coaching and can provide guidance on leadership development, succession planning, and navigating complex organizational dynamics.', NULL),
 (30, 'English', 1006, 'I am an experienced executive coach ready to support you in achieving your leadership goals and making a positive impact in your organization and beyond.', 4.6);
 
 INSERT INTO Services
@@ -306,16 +306,49 @@ VALUES
 	(29, 'Fitness Consultant', 'Fitness Solutions Agency', 'Personal Trainer (ABC Gym)', 15),
 	(30, 'Holistic Health Practitioner', 'Holistic Wellness Center', 'Reiki Practitioner (XYZ Healing Arts)', 10);
 
---GO
---CREATE PROCEDURE sp_AddUsers @firstname nvarchar(20), @lastname nvarchar(20), @email varchar(50),
---@telephone varchar(20), @dob date, @country varchar(20), @gender char, @role varchar(6)
---AS
---	IF EXISTS(SELECT Email, Telephone FROM Users WHERE Email = @email OR Telephone = @telephone )
---		THROW 50007, 'The pet has already existed', 1
---	ELSE
---		INSERT INTO Pets 
---		VALUES (@ID, @Type, @Lostdate, @DetailType, @weight, @height, @Color, @Name,@Description, @Location, @gender);
---GO
+
+
+
+--CREATE FUNCTION:
+--Function 1: Insert information of user
+CREATE PROCEDURE sp_AddUsers @firstname nvarchar(20), @lastname nvarchar(20), @email varchar(50),
+@telephone varchar(20), @dob date, @country varchar(20), @gender char, @role varchar(6)
+AS
+BEGIN
+	IF EXISTS(SELECT Email, Telephone FROM Users WHERE Email = @email OR Telephone = @telephone )
+		PRINT 'The user has already existed. Insert failed.'
+	ELSE
+		INSERT INTO Users 
+		VALUES (@firstname, @lastname, @email, @telephone, @dob, @country, @gender, @role)
+		PRINT 'Insert successfully'
+
+END
+GO
+
+EXEC sp_AddUsers 'Lee', 'Han', 'leehan123@gmail.com', '0905123456', '1987-07-05', 'Korea', 'M', 'Mentee';
+DROP PROCEDURE dbo.sp_AddUsers
+
+--Function 2: Create account
+CREATE PROCEDURE dbo.InsertIntoRegister @userID int, @username varchar(20), @password varchar(20), @created_at date
+AS
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Register WHERE username = @username)
+        AND LEN(@password) >= 6 AND LEN(@password) <= 20
+    BEGIN
+        INSERT INTO Register (userID, username, password, created_at)
+        VALUES (@userID, @username, @password, @created_at)
+        PRINT 'Insert successfully'
+    END
+    ELSE
+    BEGIN
+        PRINT 'Information is wrong. Insert failed'
+    END
+END
+GO
+
+EXEC dbo.InsertIntoRegister 51, 'han_lee', '12345678','2023-07-21'
+
+
 
 -- Rollback all transactions
 ALTER DATABASE Coaching_Website SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
