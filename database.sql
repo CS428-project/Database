@@ -192,8 +192,40 @@ VALUES
 	('Ella', 'Bailey', 'ella.bailey@example.com', '9873216540', '1993-09-22', 'Australia', 'F', 'Mentee'),
 	('Isaac', 'Murphy', 'isaac.murphy@example.com', '4561237890', '1995-01-12', 'USA', 'M', 'Mentee'),
 	('Madison', 'Rogers', 'madison.rogers@example.com', '7418529630', '1997-06-20', 'Canada', 'F', 'Mentee'),
-	('Elijah', 'Reynolds', 'elijah.reynolds@example.com', '3698521470', '1989-03-08', 'UK', 'M', 'Mentee');
+	('Elijah', 'Reynolds', 'elijah.reynolds@example.com', '3698521470', '1989-03-08', 'UK', 'M', 'Mentee')
+	('Sophia', 'Hill', 'sophia.hill@example.com', '3698521470', '1991-04-05', 'USA', 'F', 'Mentee'),
+	('Alexander', 'Allen', 'alexander.allen@example.com', '1237894560', '1993-07-12', 'Canada', 'M', 'Mentee'),
+	('Ella', 'Cole', 'ella.cole@example.com', '9876543210', '1994-09-18', 'Australia', 'F', 'Mentee'),
+	('Jackson', 'Turner', 'jackson.turner@example.com', '5551234567', '1995-12-22', 'UK', 'M', 'Mentee'),
+	('Aria', 'Baker', 'aria.baker@example.com', '7894561230', '1992-02-25', 'USA', 'F', 'Mentee'),
+	('Lucas', 'Wright', 'lucas.wright@example.com', '3691472580', '1993-04-28', 'Canada', 'M', 'Mentee'),
+	('Scarlett', 'Cook', 'scarlett.cook@example.com', '1234567890', '1996-07-31', 'Australia', 'F', 'Mentee'),
+	('Carter', 'Harris', 'carter.harris@example.com', '9876541230', '1997-09-08', 'UK', 'M', 'Mentee'),
+	('Grace', 'Roberts', 'grace.roberts@example.com', '5557891230', '1994-11-15', 'USA', 'F', 'Mentee'),
+	('Mason', 'Turner', 'mason.turner@example.com', '7893214560', '1995-12-23', 'Canada', 'M', 'Mentee'),
+	('Layla', 'Bell', 'layla.bell@example.com', '3216549870', '1998-03-30', 'Australia', 'F', 'Mentee'),
+	('Oliver', 'Parker', 'oliver.parker@example.com', '3698521470', '1992-05-09', 'UK', 'M', 'Mentee'),
+	('Chloe', 'Bailey', 'chloe.bailey@example.com', '1234567890', '1995-08-12', 'USA', 'F', 'Mentee'),
+	('Elijah', 'Morris', 'elijah.morris@example.com', '9876543210', '1996-09-18', 'Canada', 'M', 'Mentee'),
+	('Aurora', 'Reed', 'aurora.reed@example.com', '5551234567', '1999-12-22', 'Australia', 'F', 'Mentee'),
+	('Wyatt', 'Clark', 'wyatt.clark@example.com', '7894561230', '1994-02-25', 'UK', 'M', 'Mentee'),
+	('Harper', 'Walker', 'harper.walker@example.com', '3691472580', '1995-04-28', 'USA', 'F', 'Mentee'),
+	('Sebastian', 'Cook', 'sebastian.cook@example.com', '1234567890', '1998-07-31', 'Canada', 'M', 'Mentee'),
+	('Luna', 'Harris', 'luna.harris@example.com', '9876541230', '1999-09-08', 'Australia', 'F', 'Mentee'),
+	('Henry', 'Roberts', 'henry.roberts@example.com', '5557891230', '1996-11-15', 'UK', 'M', 'Mentee'),
+	('Stella', 'Turner', 'stella.turner@example.com', '7893214560', '1997-12-23', 'USA', 'F', 'Mentee'),
+	('Leo', 'Bell', 'leo.bell@example.com', '3216549870', '1992-05-09', 'Canada', 'M', 'Mentee'),
+	('Willow', 'Parker', 'willow.parker@example.com', '1234567890', '1995-08-12', 'Australia', 'F', 'Mentee'),
+	('Liam', 'Bailey', 'liam.bailey@example.com', '9876543210', '1998-09-18', 'UK', 'M', 'Mentee'),
+	('Nora', 'Reed', 'nora.reed@example.com', '5551234567', '1999-12-22', 'USA', 'F', 'Mentee'),
+	('Benjamin', 'Clark', 'benjamin.clark@example.com', '7894561230', '1996-02-25', 'Canada', 'M', 'Mentee'),
+	('Paisley', 'Walker', 'paisley.walker@example.com', '3691472580', '1997-04-28', 'Australia', 'F', 'Mentee'),
+	('Mateo', 'Cook', 'mateo.cook@example.com', '1234567890', '2000-07-31', 'UK', 'M', 'Mentee'),
+	('Emilia', 'Harris', 'emilia.harris@example.com', '9876541230', '2001-09-08', 'USA', 'F', 'Mentee'),
+	('James', 'Roberts', 'james.roberts@example.com', '5557891230', '1998-11-15', 'Canada', 'M', 'Mentee');
 
+--ID: FirstName_LastName
+--Password: 12345678
 INSERT INTO Register (userID, username, password, created_at)
 SELECT ID, CONCAT(LOWER(FirstName), '_', LOWER(LastName)), '12345678', '2023-09-01'
 FROM Users
@@ -218,7 +250,7 @@ VALUES
 (7, 'English', 1002, 'Greetings! As an education coach, I am passionate about helping students develop effective study techniques, organizational skills, and a growth mindset to excel academically.', 4.5),
 (8, 'English', 1002, 'Hello! With my expertise in education coaching, I can guide you in setting goals, improving study habits, and maximizing your learning potential.', 4.2),
 (9, 'English', 1002, 'Welcome! I specialize in education coaching and can provide personalized guidance to help you overcome challenges, boost your motivation, and succeed academically.', 4.4),
-(10, 'English', 1002, 'I am an experienced education coach ready to support you in achieving your educational goals. Let us work together to unlock your full academic potential.', NULL),
+(10, 'English', 1002, 'I am an experienced education coach ready to support you in achieving your educational goals. Let us work together to unlock your full academic potential.', 4.3),
 (11, 'English', 1003, 'Hello! As a business coach, I can help you develop and implement effective strategies to drive growth and achieve your business objectives.', 4.3),
 (12, 'English', 1003, 'Greetings! I specialize in business coaching and can assist you in various aspects of entrepreneurship, such as business planning, marketing, and leadership development.', 4.5),
 (13, 'English', 1003, 'Hi there! With my expertise in business coaching, I can guide you in building a successful business, overcoming challenges, and reaching new heights of success.', NULL),
@@ -231,13 +263,13 @@ VALUES
 (20, 'English', 1004, 'I am an experienced career coach ready to support you in achieving your career goals and finding fulfillment in your professional journey. Let us work together to unlock your full potential.', 4.6),
 (21, 'English', 1005, 'Hello! As a personal development coach, I am dedicated to helping individuals cultivate self-awareness, enhance their mindset, and achieve personal growth.', 4.3),
 (22, 'English', 1005, 'Hi there! I specialize in personal development coaching and can guide you in discovering your strengths, overcoming self-limiting beliefs, and creating a life of fulfillment.', 4.5),
-(23, 'English', 1005, 'Greetings! With my expertise in personal development coaching, I can support you in setting meaningful goals, improving self-confidence, and unlocking your full potential.', NULL),
+(23, 'English', 1005, 'Greetings! With my expertise in personal development coaching, I can support you in setting meaningful goals, improving self-confidence, and unlocking your full potential.', 4.8),
 (24, 'English', 1005, 'Welcome! I am a personal development coach committed to empowering you to overcome obstacles, develop resilience, and live a purposeful and authentic life.',4.4),
-(25, 'English', 1005, 'I am an experienced personal development coach ready to guide you on your journey of self-discovery, personal growth, and transformation. Together, we can create positive change.',NULL),
+(25, 'English', 1005, 'I am an experienced personal development coach ready to guide you on your journey of self-discovery, personal growth, and transformation. Together, we can create positive change.',4.6),
 (26, 'English', 1006, 'Hi! As an executive coach, I specialize in partnering with leaders to enhance their leadership skills, develop effective communication, and achieve professional success.', 4.3),
 (27, 'English', 1006, 'Greetings! I am an experienced executive coach dedicated to supporting senior executives in maximizing their potential, leading with impact, and driving organizational excellence.', 4.5),
 (28, 'English', 1006, 'Hello! With my expertise in executive coaching, I can help you develop a strategic vision, strengthen your decision-making abilities, and inspire high-performing teams.', NULL),
-(29, 'English', 1006, 'Welcome! I specialize in executive coaching and can provide guidance on leadership development, succession planning, and navigating complex organizational dynamics.', NULL),
+(29, 'English', 1006, 'Welcome! I specialize in executive coaching and can provide guidance on leadership development, succession planning, and navigating complex organizational dynamics.', 5),
 (30, 'English', 1006, 'I am an experienced executive coach ready to support you in achieving your leadership goals and making a positive impact in your organization and beyond.', 4.6);
 
 INSERT INTO Services
@@ -348,7 +380,32 @@ GO
 
 EXEC dbo.InsertIntoRegister 51, 'han_lee', '12345678','2023-07-21'
 
-
+-- add mentor
+CREATE PROCEDURE sp_InsertMentor @userID int, @language nvarchar(100), @fieldID int, @description text, @rating float
+AS
+BEGIN
+    -- Check if the provided userID is a valid mentor (User.role = 'Mentor')
+    IF EXISTS (SELECT 1 FROM Users WHERE ID = @userID AND role = 'Mentor')
+    BEGIN
+        -- Check if the provided fieldID is a valid field (Field.ID exists in the Field table)
+        IF EXISTS (SELECT 1 FROM Field WHERE ID = @fieldID)
+        BEGIN
+            -- Insert into Mentor table
+            INSERT INTO Mentor (mentorID, Language, FieldID, Description, Rating)
+            VALUES (@userID, @language, @fieldID, @description, @rating);
+            
+            PRINT 'Mentor inserted successfully.'
+        END
+        ELSE
+        BEGIN
+            PRINT 'Invalid FieldID. Insert failed.'
+        END
+    END
+    ELSE
+    BEGIN
+        PRINT 'Invalid UserID or User is not a Mentor. Insert failed.'
+    END
+END
 
 -- Rollback all transactions
 ALTER DATABASE Coaching_Website SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
