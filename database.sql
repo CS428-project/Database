@@ -357,13 +357,16 @@ BEGIN
 END
 GO
 
-EXEC sp_AddUsers 'Lee', 'Han', 'leehan123@gmail.com', '0905123456', '1987-07-05', 'Korea', 'M', 'Mentee';
-DROP PROCEDURE dbo.sp_AddUsers
+EXEC sp_AddUsers 'Lee', 'Han', 'leehan123@gmail.com', '0905123456', '1977-07-05', 'Korea', 'M', 'Mentor';
+
 
 --Function 2: Create account
-CREATE PROCEDURE dbo.InsertIntoRegister @userID int, @username varchar(20), @password varchar(20), @created_at date
+CREATE PROCEDURE dbo.InsertIntoRegister @username varchar(20), @password varchar(20), @created_at date
 AS
 BEGIN
+    DECLARE @userID int
+    SELECT @userID = MAX(ID) FROM Users
+
     IF NOT EXISTS (SELECT 1 FROM Register WHERE username = @username)
         AND LEN(@password) >= 6 AND LEN(@password) <= 20
     BEGIN
@@ -378,22 +381,20 @@ BEGIN
 END
 GO
 
-EXEC dbo.InsertIntoRegister 51, 'han_lee', '12345678','2023-07-21'
+EXEC dbo.InsertIntoRegister 'han_lee', '12345678','2023-07-21'
 
 -- add mentor
-CREATE PROCEDURE sp_InsertMentor @userID int, @language nvarchar(100), @fieldID int, @description text, @rating float
+CREATE PROCEDURE sp_InsertMentor @language nvarchar(100), @fieldID int, @description text, @rating float
 AS
 BEGIN
-    -- Check if the provided userID is a valid mentor (User.role = 'Mentor')
-    IF EXISTS (SELECT 1 FROM Users WHERE ID = @userID AND role = 'Mentor')
+    DECLARE @userID int
+    SELECT @userID = MAX(ID) FROM Users WHERE role = 'Mentor'
+    IF @userID IS NOT NULL
     BEGIN
-        -- Check if the provided fieldID is a valid field (Field.ID exists in the Field table)
         IF EXISTS (SELECT 1 FROM Field WHERE ID = @fieldID)
         BEGIN
-            -- Insert into Mentor table
             INSERT INTO Mentor (mentorID, Language, FieldID, Description, Rating)
             VALUES (@userID, @language, @fieldID, @description, @rating);
-            
             PRINT 'Mentor inserted successfully.'
         END
         ELSE
@@ -403,9 +404,19 @@ BEGIN
     END
     ELSE
     BEGIN
-        PRINT 'Invalid UserID or User is not a Mentor. Insert failed.'
+        PRINT 'No Mentor found in the Users table. Insert failed.'
     END
 END
+
+
+EXEC sp_InsertMentor  @language = 'English', @fieldID = 1001, @description = 'As a passionate health and wellness coach, I am dedicated to helping you achieve balance and fulfillment in life. Let us work together to improve your overall well-being.', @rating = 4.5;
+
+
+
+
+DROP PROCEDURE dbo.sp_AddUsers;
+DROP PROCEDURE dbo.InsertIntoRegister;
+DROP PROCEDURE dbo.sp_InsertMentor;
 
 -- Rollback all transactions
 ALTER DATABASE Coaching_Website SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
