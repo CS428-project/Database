@@ -388,13 +388,16 @@ CREATE PROCEDURE sp_InsertMentor @language nvarchar(100), @fieldID int, @descrip
 AS
 BEGIN
     DECLARE @userID int
+
     SELECT @userID = MAX(ID) FROM Users WHERE role = 'Mentor'
+
     IF @userID IS NOT NULL
     BEGIN
         IF EXISTS (SELECT 1 FROM Field WHERE ID = @fieldID)
         BEGIN
             INSERT INTO Mentor (mentorID, Language, FieldID, Description, Rating)
             VALUES (@userID, @language, @fieldID, @description, @rating);
+
             PRINT 'Mentor inserted successfully.'
         END
         ELSE
@@ -411,13 +414,65 @@ END
 
 EXEC sp_InsertMentor  @language = 'English', @fieldID = 1001, @description = 'As a passionate health and wellness coach, I am dedicated to helping you achieve balance and fulfillment in life. Let us work together to improve your overall well-being.', @rating = 4.5;
 
+--insert Work Expericence
+CREATE PROCEDURE sp_InsertWorkExperience @current_job text, @current_workplace text, @old_job text, @years_experience int
+AS
+BEGIN
+    DECLARE @mentorID int;
+    SELECT @mentorID = MAX(mentorID) FROM Mentor;
+    IF @mentorID IS NOT NULL
+    BEGIN
+        IF NOT EXISTS (SELECT 1 FROM WorkExperience WHERE mentorID = @mentorID)
+        BEGIN
+            INSERT INTO WorkExperience (mentorID, current_job, current_workplace, old_job, years_experience)
+            VALUES (@mentorID, @current_job, @current_workplace, @old_job, @years_experience);
+        
+            PRINT 'Work experience inserted successfully.'
+        END
+        ELSE
+        BEGIN
+            PRINT 'The mentorID already exists in the WorkExperience table. Insert failed.'
+        END
+    END
+    ELSE
+    BEGIN
+        PRINT 'No mentorID found in the Mentor table. Insert failed.'
+    END
+END
 
+EXEC sp_InsertWorkExperience 'Doctor', 'General Hospital', 'Medical Intern (ABC Hospital)', 15
+
+--insert service
+CREATE PROCEDURE sp_InsertService
+    @cost varchar(20),
+    @fieldID int,
+    @information text,
+    @work_time text
+AS
+BEGIN
+    DECLARE @mentorID int
+    SELECT @mentorID = MAX(mentorID) FROM Mentor;
+    IF NOT EXISTS (SELECT 1 FROM Services WHERE mentorID = @mentorID)
+    BEGIN
+        INSERT INTO Services (mentorID, Cost, FieldID, Information, work_time)
+        VALUES (@mentorID, @cost, @fieldID, @information, @work_time);
+
+        PRINT 'Service inserted successfully.'
+    END
+    ELSE
+    BEGIN
+        PRINT 'MentorID already exists in the Services table. Insert failed.'
+    END
+END
+
+EXEC sp_InsertService '100$/hour', 1001, 'I provide medical consultations and health advice to promote overall well-being and address various health concerns.', '09h00-17h00(Monday-Friday)';
 
 
 DROP PROCEDURE dbo.sp_AddUsers;
 DROP PROCEDURE dbo.InsertIntoRegister;
 DROP PROCEDURE dbo.sp_InsertMentor;
-
+DROP PROCEDURE dbo.sp_InsertWorkExperience;
+DROP PROCEDURE dbo.sp_InsertService;
 -- Rollback all transactions
 ALTER DATABASE Coaching_Website SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 -- Select master database
