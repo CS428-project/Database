@@ -23,8 +23,8 @@ CREATE TABLE Users
 CREATE TABLE Register
 (
 	userID int NOT NULL,
-	username varchar(20) NOT NULL,
-	password varchar(20) NOT NULL,
+	username VARCHAR(50) NOT NULL,
+	password VARBINARY(32) NOT NULL,
 	created_at date,
 	UNIQUE(username),
 	PRIMARY KEY(userID, username)
@@ -227,8 +227,12 @@ VALUES
 --ID: FirstName_LastName
 --Password: 12345678
 INSERT INTO Register (userID, username, password, created_at)
-SELECT ID, CONCAT(LOWER(FirstName), '_', LOWER(LastName)), '12345678', '2023-09-01'
-FROM Users
+SELECT
+    ID,
+    CONCAT(LOWER(FirstName), LOWER(LastName), FORMAT(DOB, 'ddMM')) as username,
+    CONVERT(VARBINARY(32), HASHBYTES('SHA2_256', CONCAT(UPPER(LEFT(FirstName, 1)), LastName, FLOOR(RAND(CHECKSUM(NEWID())) * 10001)))) as password,
+    '2023-09-01' as created_at
+FROM Users;
 
 INSERT INTO Field(Type)
 VALUES
@@ -361,17 +365,22 @@ EXEC sp_AddUsers 'Lee', 'Han', 'leehan123@gmail.com', '0905123456', '1977-07-05'
 
 
 --Function 2: Create account
-CREATE PROCEDURE dbo.InsertIntoRegister @username varchar(20), @password varchar(20), @created_at date
+CREATE PROCEDURE dbo.InsertIntoRegister 
+    @userID int,
+    @username VARCHAR(50),
+    @password VARCHAR(20),
+    @created_at date
 AS
 BEGIN
-    DECLARE @userID int
-    SELECT @userID = MAX(ID) FROM Users
-
     IF NOT EXISTS (SELECT 1 FROM Register WHERE username = @username)
         AND LEN(@password) >= 6 AND LEN(@password) <= 20
     BEGIN
+        DECLARE @hashedPassword VARBINARY(32)
+        SET @hashedPassword = CONVERT(VARBINARY(32), HASHBYTES('SHA2_256', @password))
+
         INSERT INTO Register (userID, username, password, created_at)
-        VALUES (@userID, @username, @password, @created_at)
+        VALUES (@userID, @username, @hashedPassword, @created_at)
+
         PRINT 'Insert successfully'
     END
     ELSE
