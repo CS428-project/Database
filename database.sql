@@ -1,4 +1,3 @@
---create database
 CREATE DATABASE Coaching_Website
 
 GO 
@@ -141,11 +140,94 @@ alter table Booking
 ADD CONSTRAINT FK_BOOKING_PAYMENTID
 FOREIGN KEY(paymentID) REFERENCES Payment(ID);
 
+INSERT INTO Users(FirstName, LastName, Email, Telephone, DOB, Country, Gender, Role)--0-30 mentors,31-80 mentees
+VALUES
+	('John', 'Doe', 'john.doe@example.com', '1234567890', '1970-05-15', 'USA', 'M', 'Mentor'),
+	('Jane', 'Smith', 'jane.smith@example.com', '9876543210', '1982-08-25', 'Canada', 'F', 'Mentor'),
+	('David', 'Johnson', 'david.johnson@example.com', '5551234567', '1985-11-10', 'Australia', 'M', 'Mentor'),
+	('Sarah', 'Williams', 'sarah.williams@example.com', '7894561230', '1978-02-18', 'UK', 'F', 'Mentor'),
+	('Emily', 'Brown', 'emily.brown@example.com', '3216549870', '1971-04-30', 'USA', 'F', 'Mentor'),
+	('Michael', 'Taylor', 'michael.taylor@example.com', '1237894560', '1982-07-05', 'Canada', 'M', 'Mentor'),
+	('Jessica', 'Anderson', 'jessica.anderson@example.com', '9873216540', '1969-09-22', 'Australia', 'F', 'Mentor'),
+	('Daniel', 'Thomas', 'daniel.thomas@example.com', '4561237890', '1983-01-12', 'USA', 'M', 'Mentor'),
+	('Olivia', 'Davis', 'olivia.davis@example.com', '7418529630', '1977-06-20', 'Canada', 'F', 'Mentor'),
+	('Christopher', 'Wilson', 'christopher.wilson@example.com', '3698521470', '1981-03-08', 'UK', 'M', 'Mentor'),
+	('Michelle', 'Lee', 'michelle.lee@example.com', '1239874560', '1974-12-03', 'USA', 'F', 'Mentor'),
+	('Andrew', 'Wang', 'andrew.wang@example.com', '9871236540', '1986-07-17', 'Canada', 'M', 'Mentor'),
+	('Sophia', 'Martinez', 'sophia.martinez@example.com', '5557891230', '1990-09-08', 'Australia', 'F', 'Mentor'),
+	('Matthew', 'Garcia', 'matthew.garcia@example.com', '7893214560', '1992-02-25', 'UK', 'M', 'Mentor'),
+	('Isabella', 'Lopez', 'isabella.lopez@example.com', '3219876540', '1983-06-12', 'USA', 'F', 'Mentor'),
+	('William', 'Scott', 'william.scott@example.com', '1234569870', '1988-10-20', 'Canada', 'M', 'Mentor'),
+	('Ava', 'Rodriguez', 'ava.rodriguez@example.com', '9876541230', '1981-03-15', 'Australia', 'F', 'Mentor'),
+	('James', 'Nguyen', 'james.nguyen@example.com', '4567893210', '1975-05-27', 'USA', 'M', 'Mentor'),
+	('Charlotte', 'Kim', 'charlotte.kim@example.com', '7418523690', '1968-08-09', 'Canada', 'F', 'Mentor'),
+	('Benjamin', 'Lewis', 'benjamin.lewis@example.com', '3691472580', '1980-01-30', 'UK', 'M', 'Mentor'),
+	('Lily', 'Harris', 'lily.harris@example.com', '1234567890', '1982-04-15', 'USA', 'F', 'Mentor'),
+	('Henry', 'Martin', 'henry.martin@example.com', '9876543210', '1984-08-25', 'Canada', 'M', 'Mentor'),
+	('Sophie', 'Clark', 'sophie.clark@example.com', '5551234567', '1987-11-10', 'Australia', 'F', 'Mentor'),
+	('Ethan', 'Robinson', 'ethan.robinson@example.com', '7894561230', '1989-02-18', 'UK', 'M', 'Mentor'),
+	('Natalie', 'Walker', 'natalie.walker@example.com', '3216549870', '1990-04-30', 'USA', 'F', 'Mentor'),
+	('Jacob', 'Young', 'jacob.young@example.com', '1237894560', '1988-07-05', 'Canada', 'M', 'Mentor'),
+	('Grace', 'Hall', 'grace.hall@example.com', '9873216540', '1973-09-22', 'Australia', 'F', 'Mentor'),
+	('Ryan', 'Baker', 'ryan.baker@example.com', '4561237890', '1985-01-12', 'USA', 'M', 'Mentor'),
+	('Avery', 'Turner', 'avery.turner@example.com', '7418529630', '1987-06-20', 'Canada', 'F', 'Mentor'),
+	('Leo', 'Parker', 'leo.parker@example.com', '3698521470', '1989-03-08', 'UK', 'M', 'Mentor'),
+	('Sophia', 'Allen', 'sophia.allen@example.com', '1239874560', '1994-12-03', 'USA', 'F', 'Mentee'),
+	('Daniel', 'Gomez', 'daniel.gomez@example.com', '9871236540', '1996-07-17', 'Canada', 'M', 'Mentee'),
+	('Olivia', 'Powell', 'olivia.powell@example.com', '5557891230', '1999-09-08', 'Australia', 'F', 'Mentee'),
+	('Matthew', 'Perry', 'matthew.perry@example.com', '7893214560', '1992-02-25', 'UK', 'M', 'Mentee'),
+	('Emily', 'Long', 'emily.long@example.com', '3219876540', '1993-06-12', 'USA', 'F', 'Mentee'),
+	('Joshua', 'Rivera', 'joshua.rivera@example.com', '1234569870', '1988-10-20', 'Canada', 'M', 'Mentee'),
+	('Grace', 'Wright', 'grace.wright@example.com', '9876541230', '1991-03-15', 'Australia', 'F', 'Mentee'),
+	('Lucas', 'Morris', 'lucas.morris@example.com', '4567893210', '1995-05-27', 'USA', 'M', 'Mentee'),
+	('Chloe', 'Turner', 'chloe.turner@example.com', '7418523690', '1998-08-09', 'Canada', 'F', 'Mentee'),
+	('Caleb', 'Stewart', 'caleb.stewart@example.com', '3691472580', '1990-01-30', 'UK', 'M', 'Mentee'),
+	('Hannah', 'Price', 'hannah.price@example.com', '1234567890', '1992-04-15', 'USA', 'F', 'Mentee'),
+	('Julian', 'Carter', 'julian.carter@example.com', '9876543210', '1994-08-25', 'Canada', 'M', 'Mentee'),
+	('Samantha', 'Reed', 'samantha.reed@example.com', '5551234567', '1987-11-10', 'Australia', 'F', 'Mentee'),
+	('Owen', 'Cook', 'owen.cook@example.com', '7894561230', '1999-02-18', 'UK', 'M', 'Mentee'),
+	('Anna', 'Bell', 'anna.bell@example.com', '3216549870', '1990-04-30', 'USA', 'F', 'Mentee'),
+	('Nathan', 'Brooks', 'nathan.brooks@example.com', '1237894560', '1988-07-05', 'Canada', 'M', 'Mentee'),
+	('Ella', 'Bailey', 'ella.bailey@example.com', '9873216540', '1993-09-22', 'Australia', 'F', 'Mentee'),
+	('Isaac', 'Murphy', 'isaac.murphy@example.com', '4561237890', '1995-01-12', 'USA', 'M', 'Mentee'),
+	('Madison', 'Rogers', 'madison.rogers@example.com', '7418529630', '1997-06-20', 'Canada', 'F', 'Mentee'),
+	('Elijah', 'Reynolds', 'elijah.reynolds@example.com', '3698521470', '1989-03-08', 'UK', 'M', 'Mentee'),
+	('Sophia', 'Hill', 'sophia.hill@example.com', '3698521470', '1991-04-05', 'USA', 'F', 'Mentee'),
+	('Alexander', 'Allen', 'alexander.allen@example.com', '1237894560', '1993-07-12', 'Canada', 'M', 'Mentee'),
+	('Ella', 'Cole', 'ella.cole@example.com', '9876543210', '1994-09-18', 'Australia', 'F', 'Mentee'),
+	('Jackson', 'Turner', 'jackson.turner@example.com', '5551234567', '1995-12-22', 'UK', 'M', 'Mentee'),
+	('Aria', 'Baker', 'aria.baker@example.com', '7894561230', '1992-02-25', 'USA', 'F', 'Mentee'),
+	('Lucas', 'Wright', 'lucas.wright@example.com', '3691472580', '1993-04-28', 'Canada', 'M', 'Mentee'),
+	('Scarlett', 'Cook', 'scarlett.cook@example.com', '1234567890', '1996-07-31', 'Australia', 'F', 'Mentee'),
+	('Carter', 'Harris', 'carter.harris@example.com', '9876541230', '1997-09-08', 'UK', 'M', 'Mentee'),
+	('Grace', 'Roberts', 'grace.roberts@example.com', '5557891230', '1994-11-15', 'USA', 'F', 'Mentee'),
+	('Mason', 'Turner', 'mason.turner@example.com', '7893214560', '1995-12-23', 'Canada', 'M', 'Mentee'),
+	('Layla', 'Bell', 'layla.bell@example.com', '3216549870', '1998-03-30', 'Australia', 'F', 'Mentee'),
+	('Oliver', 'Parker', 'oliver.parker@example.com', '3698521470', '1992-05-09', 'UK', 'M', 'Mentee'),
+	('Chloe', 'Bailey', 'chloe.bailey@example.com', '1234567890', '1995-08-12', 'USA', 'F', 'Mentee'),
+	('Elijah', 'Morris', 'elijah.morris@example.com', '9876543210', '1996-09-18', 'Canada', 'M', 'Mentee'),
+	('Aurora', 'Reed', 'aurora.reed@example.com', '5551234567', '1999-12-22', 'Australia', 'F', 'Mentee'),
+	('Wyatt', 'Clark', 'wyatt.clark@example.com', '7894561230', '1994-02-25', 'UK', 'M', 'Mentee'),
+	('Harper', 'Walker', 'harper.walker@example.com', '3691472580', '1995-04-28', 'USA', 'F', 'Mentee'),
+	('Sebastian', 'Cook', 'sebastian.cook@example.com', '1234567890', '1998-07-31', 'Canada', 'M', 'Mentee'),
+	('Luna', 'Harris', 'luna.harris@example.com', '9876541230', '1999-09-08', 'Australia', 'F', 'Mentee'),
+	('Henry', 'Roberts', 'henry.roberts@example.com', '5557891230', '1996-11-15', 'UK', 'M', 'Mentee'),
+	('Stella', 'Turner', 'stella.turner@example.com', '7893214560', '1997-12-23', 'USA', 'F', 'Mentee'),
+	('Leo', 'Bell', 'leo.bell@example.com', '3216549870', '1992-05-09', 'Canada', 'M', 'Mentee'),
+	('Willow', 'Parker', 'willow.parker@example.com', '1234567890', '1995-08-12', 'Australia', 'F', 'Mentee'),
+	('Liam', 'Bailey', 'liam.bailey@example.com', '9876543210', '1998-09-18', 'UK', 'M', 'Mentee'),
+	('Nora', 'Reed', 'nora.reed@example.com', '5551234567', '1999-12-22', 'USA', 'F', 'Mentee'),
+	('Benjamin', 'Clark', 'benjamin.clark@example.com', '7894561230', '1996-02-25', 'Canada', 'M', 'Mentee'),
+	('Paisley', 'Walker', 'paisley.walker@example.com', '3691472580', '1997-04-28', 'Australia', 'F', 'Mentee'),
+	('Mateo', 'Cook', 'mateo.cook@example.com', '1234567890', '2000-07-31', 'UK', 'M', 'Mentee'),
+	('Emilia', 'Harris', 'emilia.harris@example.com', '9876541230', '2001-09-08', 'USA', 'F', 'Mentee'),
+	('James', 'Roberts', 'james.roberts@example.com', '5557891230', '1998-11-15', 'Canada', 'M', 'Mentee');
+
 --ID: FirstName_LastName_day of birth_month of birth + random number from 0-9999, hashed by function sha2_256
 --Password: first character of firstname capital + Lastname
 INSERT INTO Register (userID, username, password, created_at)
 SELECT
-    ID,
+	ID,
     CONCAT(LOWER(FirstName), LOWER(LastName), FORMAT(DOB, 'ddMM')) as username,
     CONVERT(VARBINARY(32), HASHBYTES('SHA2_256', CONCAT(UPPER(LEFT(FirstName, 1)), LastName, FLOOR(RAND(CHECKSUM(NEWID())) * 10001)))) as password,
     '2023-09-01' as created_at
@@ -452,16 +534,21 @@ EXEC sp_AddUsers 'Lee', 'Han', 'leehan123@gmail.com', '0905123456', '1977-07-05'
 
 --Function 2: Create account
 CREATE PROCEDURE dbo.InsertIntoRegister 
-    @userID int,
     @username VARCHAR(50),
-    @password VARBINARY(32),
-    @created_at date
+    @password VARCHAR(20),
+    @created_at DATE
 AS
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM Register WHERE username = @username)
-        AND LEN(@password) >= 6 AND LEN(@password) <= 20
+    DECLARE @userID INT
+
+    -- Calculate the next userID value based on the maximum userID from the User table
+    SELECT @userID = ISNULL(MAX(ID), 0) FROM Users
+
+    IF LEN(@password) >= 6 AND LEN(@password) <= 20
     BEGIN
         DECLARE @hashedPassword VARBINARY(32)
+
+        -- Convert the password to VARBINARY before hashing
         SET @hashedPassword = CONVERT(VARBINARY(32), HASHBYTES('SHA2_256', @password))
 
         INSERT INTO Register (userID, username, password, created_at)
@@ -471,13 +558,12 @@ BEGIN
     END
     ELSE
     BEGIN
-        PRINT 'Information is wrong. Insert failed'
+        PRINT 'Password length should be between 6 and 20 characters. Insert failed'
     END
 END
 GO
 
-
-EXEC dbo.InsertIntoRegister 'han_lee', '12345678','2023-07-21'
+EXEC dbo.InsertIntoRegister 'han_lee', '12345678', '2023-07-21'
 
 -- add mentor
 CREATE PROCEDURE sp_InsertMentor @language nvarchar(100), @fieldID int, @description text, @rating float
