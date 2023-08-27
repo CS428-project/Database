@@ -533,7 +533,7 @@ EXEC sp_AddUsers 'Lee', 'Han', 'leehan123@gmail.com', '0905123456', '1977-07-05'
 
 
 --Function 2: Create account
-CREATE PROCEDURE sp_createNewUser  
+CREATE PROCEDURE dbo.InsertIntoRegister 
     @username VARCHAR(50),
     @password VARCHAR(20),
     @created_at DATE
@@ -563,7 +563,7 @@ BEGIN
 END
 GO
 
-EXEC sp_createNewUser  'han_lee', '12345678', '2023-07-21'
+EXEC dbo.InsertIntoRegister 'han_lee', '12345678', '2023-07-21'
 
 -- add mentor
 CREATE PROCEDURE sp_InsertMentor @language nvarchar(100), @fieldID int, @description text, @rating float
@@ -734,6 +734,238 @@ BEGIN
         PRINT 'Feedback can only be inserted for bookings with a status of "Completed".'
     END
 END
+
+--list mentor xếp theo rating giảm dần
+CREATE PROCEDURE sp_getMentorInfoByRating
+AS
+BEGIN
+    SELECT m.mentorID, m.Language, m.FieldID, m.Description, m.Rating
+    FROM Mentor m
+    ORDER BY m.Rating DESC;
+END
+GO
+
+EXEC sp_getMentorInfoByRating;
+
+--name of field: number of mentors each field
+CREATE PROCEDURE sp_getField
+AS
+BEGIN
+    SELECT f.Type AS FieldName, COUNT(m.mentorID) AS NumberOfMentors
+    FROM Field f
+    LEFT JOIN Mentor m ON f.ID = m.FieldID
+    GROUP BY f.Type;
+END
+GO
+
+EXEC sp_getField;
+
+--sp_getMentorByField # input fieldName, output: list mentor trong field
+CREATE PROCEDURE sp_getMentorByField
+    @fieldName NVARCHAR(50)
+AS
+BEGIN
+    SELECT m.mentorID, m.Language, m.Description, m.Rating
+    FROM Mentor m
+    INNER JOIN Field f ON m.FieldID = f.ID
+    WHERE f.Type = @fieldName;
+END
+GO
+
+EXEC sp_getMentorByField @fieldName = 'Education Coaching';
+
+--keyword, output: mentor profile containing that keyword
+CREATE PROCEDURE sp_searchMentorByKeyword
+    @keyword NVARCHAR(100)
+AS
+BEGIN
+    DECLARE @MatchCount INT
+
+    -- Count how many mentors match the keyword
+    SELECT @MatchCount = COUNT(*)
+    FROM Mentor
+    WHERE Language LIKE '%' + @keyword + '%'
+       OR Description LIKE '%' + @keyword + '%';
+
+    -- If at least one mentor matches the keyword, retrieve their profiles
+    IF @MatchCount > 0
+    BEGIN
+        SELECT m.mentorID, m.Language, m.Description, m.Rating
+        FROM Mentor m
+        WHERE m.Language LIKE '%' + @keyword + '%'
+           OR m.Description LIKE '%' + @keyword + '%';
+    END
+    ELSE
+    BEGIN
+        PRINT 'No mentor profiles found for the keyword ' + @keyword;
+    END
+END
+GO
+
+EXEC sp_searchMentorByKeyword @keyword = 'business';
+
+--sp_checkLogin #username+pass
+CREATE PROCEDURE sp_checkLogin
+    @username VARCHAR(50),
+    @password VARCHAR(20)
+AS
+BEGIN
+    DECLARE @hashedPassword VARBINARY(32)
+
+    -- Convert the password to VARBINARY and hash it
+    SET @hashedPassword = CONVERT(VARBINARY(32), HASHBYTES('SHA2_256', @password))
+
+    IF EXISTS (
+        SELECT 1
+        FROM Register
+        WHERE username = @username
+          AND password = @hashedPassword
+    )
+    BEGIN
+        PRINT 'Login successful';
+    END
+    ELSE
+    BEGIN
+        PRINT 'Login failed';
+    END
+END
+GO
+
+EXEC sp_checkLogin @username = 'han_lee', @password = '12345678';
+
+--#booking.mentorID, booking.menteeID, booking.book_at, booking.time, booking.status, output: update success or not
+CREATE PROCEDURE sp_updateBooking
+    @mentorID INT,
+    @menteeID INT,
+    @book_at DATE,
+    @time VARCHAR(50),
+    @status VARCHAR(20)
+AS
+BEGIN
+    -- Update the booking status
+    UPDATE Booking
+    SET status = @status
+    WHERE mentorID = @mentorID
+      AND menteeID = @menteeID
+      AND book_at = @book_at
+      AND time = @time;
+
+    -- Check if the update was successful
+    IF @@ROWCOUNT > 0
+    BEGIN
+        PRINT 'Update successful';
+    END
+    ELSE
+    BEGIN
+        PRINT 'Update failed';
+    END
+END
+GO
+
+EXEC sp_updateBooking 
+    @mentorID = 11,
+    @menteeID = 32,
+    @book_at = '2023-07-27',
+    @time = '10:00 AM',
+    @status = 'Completed';
+
+--sp_getListBookingMentee #input: menteeid, output: booking list of that mentee
+CREATE PROCEDURE sp_getListBookingMentee
+    @menteeID INT
+AS
+BEGIN
+    -- Check if menteeID corresponds to a mentee
+    IF EXISTS (
+        SELECT 1
+        FROM Users
+        WHERE ID = @menteeID AND Role = 'Mentee'
+    )
+    BEGIN
+        SELECT b.ID, b.mentorID, b.book_at, b.time, b.status
+        FROM Booking b
+        WHERE b.menteeID = @menteeID;
+    END
+    ELSE
+    BEGIN
+        PRINT 'Mentee not found';
+    END
+END
+GO
+
+EXEC sp_getListBookingMentee @menteeID = 45;
+
+--sp_getListBookingMentor #input: mentorid, output: booking list of that mentor
+CREATE PROCEDURE sp_getListBookingMentor
+    @mentorID INT
+AS
+BEGIN
+    -- Check if mentorID corresponds to a mentor
+    IF EXISTS (
+        SELECT 1
+        FROM Users
+        WHERE ID = @mentorID AND Role = 'Mentor'
+    )
+    BEGIN
+        SELECT b.ID, b.menteeID, b.book_at, b.time, b.status
+        FROM Booking b
+        WHERE b.mentorID = @mentorID;
+    END
+    ELSE
+    BEGIN
+        PRINT 'Mentor not found';
+    END
+END
+GO
+
+EXEC sp_getListBookingMentor @mentorID = 12;
+
+--get list of mentor
+CREATE PROCEDURE sp_getListMentor
+AS
+BEGIN
+    SELECT m.mentorID, m.Language, m.FieldID, m.Description, m.Rating
+    FROM Mentor m
+    WHERE EXISTS (
+        SELECT 1
+        FROM Users u
+        WHERE u.ID = m.mentorID AND u.Role = 'Mentor'
+    );
+END
+GO
+
+EXEC sp_getListMentor;
+
+--delete mentor
+CREATE PROCEDURE sp_deleteMentor
+    @mentorID INT
+AS
+BEGIN
+    -- Check if mentorID corresponds to a mentor
+    IF EXISTS (
+        SELECT 1
+        FROM Users
+        WHERE ID = @mentorID AND Role = 'Mentor'
+    )
+    BEGIN
+        -- Delete the mentor from related tables
+        DELETE FROM Mentor WHERE mentorID = @mentorID;
+        DELETE FROM WorkExperience WHERE mentorID = @mentorID;
+        DELETE FROM Services WHERE mentorID = @mentorID;
+        DELETE FROM Booking WHERE mentorID = @mentorID;
+
+        -- Delete the user
+        DELETE FROM Users WHERE ID = @mentorID;
+
+        PRINT 'Mentor deleted successfully';
+    END
+    ELSE
+    BEGIN
+        PRINT 'Mentor not found';
+    END
+END
+GO
+
+EXEC sp_deleteMentor @mentorID = 123;
 
 DROP PROCEDURE dbo.sp_AddUsers;
 DROP PROCEDURE dbo.InsertIntoRegister;
