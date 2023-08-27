@@ -533,7 +533,7 @@ EXEC sp_AddUsers 'Lee', 'Han', 'leehan123@gmail.com', '0905123456', '1977-07-05'
 
 
 --Function 2: Create account
-CREATE PROCEDURE dbo.InsertIntoRegister 
+CREATE PROCEDURE sp_createNewUser  
     @username VARCHAR(50),
     @password VARCHAR(20),
     @created_at DATE
@@ -563,7 +563,7 @@ BEGIN
 END
 GO
 
-EXEC dbo.InsertIntoRegister 'han_lee', '12345678', '2023-07-21'
+EXEC sp_createNewUser  'han_lee', '12345678', '2023-07-21'
 
 -- add mentor
 CREATE PROCEDURE sp_InsertMentor @language nvarchar(100), @fieldID int, @description text, @rating float
